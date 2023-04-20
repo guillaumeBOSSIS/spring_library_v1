@@ -1,0 +1,31 @@
+-- Auteurs
+INSERT INTO `auteur` (`id`, `nom`, `prenom`, `dateNaissance`) VALUES ('1', 'de Saint-Exupéry', 'Antoine', '1930'), ('2', 'Dumas', 'Alexandre', '1880');
+INSERT INTO `auteur` (`id`, `nom`, `prenom`, `dateNaissance`) VALUES ('3', 'King', 'Stephen', '1950'), ('4', 'Rowling', 'J. K.', '1960');
+
+-- Livres
+INSERT INTO `book` (`id`, `title`, `description`, `nb_pages`, `auteur_id`) VALUES ('1', 'Harry Potter tome 1', 'Magicien', '300', '4'), ('2', 'Harry Potter tome 2', 'Magicien', '350', '4');
+INSERT INTO `book` (`id`, `title`, `description`, `nb_pages`, `auteur_id`) VALUES ('3', 'Le Comte de Monte Cristo tome 1', 'Aventure', '410', '2'), ('4', 'Le Comte de Monte Cristo tome 2', 'Aventure', '420', '2');
+INSERT INTO `book` (`id`, `title`, `description`, `nb_pages`, `auteur_id`) VALUES ('5', 'Marche ou crève', 'Dystopique', '305', '3'), ('6', 'Le petit prince', 'Aventure', '55', '1');
+
+
+-- Clients
+INSERT INTO `client` (`id`, `nom`, `prenom`, `age`) VALUES ('1', 'Bossis', 'Guillaume', '40'), ('2', 'Larousse', 'Aline', '36');
+
+
+-- listes
+INSERT INTO `listBook` (`client_id`, `book_id`) VALUES ('1', '5'), ('1', '1'), ('1', '2');
+INSERT INTO `listBook` (`client_id`, `book_id`) VALUES ('2', '6'), ('2', '3');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
