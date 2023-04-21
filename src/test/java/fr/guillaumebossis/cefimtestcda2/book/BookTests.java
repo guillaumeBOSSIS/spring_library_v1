@@ -7,6 +7,7 @@ import fr.guillaumebossis.cefimtestcda2.entities.Auteur;
 import fr.guillaumebossis.cefimtestcda2.entities.Book;
 import fr.guillaumebossis.cefimtestcda2.entities.Genre;
 import fr.guillaumebossis.cefimtestcda2.entities.State;
+import fr.guillaumebossis.cefimtestcda2.entities.repository.GenreRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class BookTests {
     private BookService bookService;
     @Autowired
     private AuteurService auteurService;
+    @Autowired
+    private GenreRepository genreRepository;
 
     // Classe pour simuler des appels REST
     @Autowired
@@ -98,11 +101,13 @@ public class BookTests {
 
         // Pour envoyer un livre, bien penser à indiquer le type du contenu du body (JSON = .contentType(MediaType.APPLICATION_JSON)
         // Et à serialiser le contenu (.content(objectMapper.writeValueAsString(book)))
-        Auteur auteurToFind = new Auteur("Rowling", "J. K.", 1960);
-        Auteur auteur = auteurService.findAuteur(auteurToFind);
-        int auteurId = auteur.getId();
+        Auteur auteur = new Auteur("Rowling", "J. K.", 1960);
+        //Auteur auteur = auteurService.findAuteur(auteurToFind);
+        //int auteurId = auteur.getId();
         //Auteur existingAuteur = auteurService.getById(auteur.getId());
-        Book book = new Book("Harry Potter tome 3", "Magicien", 250, null, null, null, false);
+        Book book = new Book("Harry Potter tome 3", "Magicien", 250, null, null, genreTest, false);
+
+        bookService.saveBook(book);
         RequestBuilder request = MockMvcRequestBuilders.post("/api/book")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(book));
@@ -200,5 +205,11 @@ public class BookTests {
         List<Book> books = Arrays.asList(objectMapper.readValue(contentAsString, Book[].class));
         assert books.contains(bookTest);
     }
+
+//    @Test
+//    void testFindGenreByLibelle() {
+//        Genre genreTest = new Genre("Aventure");
+//        assert genreRepository.findByLibelleIgnoreCase(String.valueOf(genreTest)) == ;
+//    }
 
 }

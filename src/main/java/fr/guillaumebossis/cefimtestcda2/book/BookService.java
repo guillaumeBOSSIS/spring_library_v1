@@ -8,6 +8,9 @@ import fr.guillaumebossis.cefimtestcda2.client.ClientService;
 import fr.guillaumebossis.cefimtestcda2.entities.Genre;
 import fr.guillaumebossis.cefimtestcda2.entities.State;
 import fr.guillaumebossis.cefimtestcda2.entities.repository.BookRepository;
+import fr.guillaumebossis.cefimtestcda2.entities.repository.GenreRepository;
+import fr.guillaumebossis.cefimtestcda2.entities.repository.StateRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -29,6 +32,12 @@ public class BookService {
     private ClientService clientService;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private GenreRepository genreRepository;
+    @Autowired
+    private StateRepository stateRepository;
+    @Autowired
+    private EntityManager entityManager;
 
     // SINON par constructeur si besoin que ce soit instancier vraiment dès le début
 //    private ClientService clientService;
@@ -95,18 +104,69 @@ public class BookService {
     // TODO
     // VIA BDD (Repository)
     public Book saveBook(Book newBook) throws EntityNotFoundException, InstanceAlreadyExistsException {
-        //Auteur auteur = auteurService.findAuteur(newBook.getAuteur());
-        Optional<Book> book = findBook(newBook);
-//        if (auteur.isPresent()){
-//            bookRepository.save(newBook);
-//            return newBook;
+        Auteur auteur = null;
+        Genre genre = null;
+        State state = null;
+        Integer auteurId = null;
+        Integer genreId = null;
+        Integer stateId = null;
+
+//        if (newBook.getAuteur() != null) {
+//            auteur = auteurService.findAuteur(newBook.getAuteur());
+//            auteurId = auteurService.getAuteurId(auteur);
 //        }
-        if (book.isPresent()){
-            throw new InstanceAlreadyExistsException("Livre déjà existant");
-        }
+//        if (newBook.getGenre() != null) {
+//            genre = genreRepository.findAll().stream().filter(a -> a.getLibelle().equals(String.valueOf(newBook.getGenre())));
+//            genreId = genreRepository.findByLibelleIgnoreCase(String.valueOf(newBook.getGenre())).getId();
+//        }
+
+        //Integer auteurId = auteurService.findAuteur(newBook.getAuteur()).getId();
+//        int genreId = genreRepository.findByLibelle(newBook.getGenre().getLibelle().toString()).getId();
+//        int stateId = stateRepository.findByLibelle(newBook.getState().getLibelle().toString()).getId();
+
+        newBook.setAuteurId(2);
+        newBook.setGenreId(1);
+        newBook.setStateId(1);
+
         bookRepository.save(newBook);
+
+
+////        Auteur auteur = auteurService.findAuteur(newBook.getAuteur());
+//        Genre genreRef = entityManager.getReference(Genre.class, 1);;
+////        if(newBook.getGenre() != null) {
+////            //genre = genreRepository.findByLibelle(newBook.getGenre().getLibelle().toString());
+////            genre = entityManager.getReference(Genre.class, 1);
+////        }
+////        State state = stateRepository.findByLibelle(newBook.getState().toString());
+//        Optional<Book> book = findBook(newBook);
+////        if (auteur.isPresent()){
+////            bookRepository.save(newBook);
+////            return newBook;
+////        }
+//        if (book.isPresent()){
+//            throw new InstanceAlreadyExistsException("Livre déjà existant");
+//        }
+//
+//
+//        newBook.setGenre(genreRef);
+//        //bookRepository.save(newBook);
+//        entityManager.persist(newBook);
+//        return newBook;
+//        //throw new EntityNotFoundException("Auteur not found, please add it first");
+//
+//        newBook.setAuteurId(1);
+//        bookRepository.save(newBook);
+//        Genre newGenre = entityManager.getReference(Genre.class, "test");
+//        Book newBook2 = entityManager.find(Book.class, 2);
+////        newBook2.setGenre(newGenre);
+////        bookRepository.save(newBook2);
+////        (bookRepository.findById(newBook2.getId())).get().setGenre(newGenre);
+
+
         return newBook;
-        //throw new EntityNotFoundException("Auteur not found, please add it first");
+
+
+
     }
 
     public Optional<Book> findBook(Book bookToFind){

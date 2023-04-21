@@ -101,4 +101,10 @@ public class AuteurTests {
         assert !auteurs.contains(auteur1);
     }
 
+    @Test
+    void testGetAuteurId() {
+        Auteur auteur1 = new Auteur("Dumas", "Alexandre", 1880);
+        assert auteurService.getAuteurId(auteur1) == 2;
+    }
+
 }
