@@ -105,7 +105,7 @@ public class BookTests {
         //Auteur auteur = auteurService.findAuteur(auteurToFind);
         //int auteurId = auteur.getId();
         //Auteur existingAuteur = auteurService.getById(auteur.getId());
-        Book book = new Book("Harry Potter tome 3", "Magicien", 250, null, null, genreTest, false);
+        Book book = new Book("Harry Potter tome 3", "Magicien", 250, auteur, null, null, false);
 
         bookService.saveBook(book);
         RequestBuilder request = MockMvcRequestBuilders.post("/api/book")

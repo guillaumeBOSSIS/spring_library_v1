@@ -111,6 +111,14 @@ public class BookService {
         Integer genreId = null;
         Integer stateId = null;
 
+        if (newBook.getAuteur() != null) {
+            auteur = auteurService.findAuteur(newBook.getAuteur());
+            newBook.setAuteur(auteur);
+            //auteurId = auteurService.getAuteurId(auteur);
+        }
+
+        bookRepository.save(newBook);
+
 //        if (newBook.getAuteur() != null) {
 //            auteur = auteurService.findAuteur(newBook.getAuteur());
 //            auteurId = auteurService.getAuteurId(auteur);
@@ -124,11 +132,11 @@ public class BookService {
 //        int genreId = genreRepository.findByLibelle(newBook.getGenre().getLibelle().toString()).getId();
 //        int stateId = stateRepository.findByLibelle(newBook.getState().getLibelle().toString()).getId();
 
-        newBook.setAuteurId(2);
-        newBook.setGenreId(1);
-        newBook.setStateId(1);
+//        newBook.setAuteurId(2);
+//        newBook.setGenreId(1);
+//        newBook.setStateId(1);
 
-        bookRepository.save(newBook);
+        //bookRepository.save(newBook);
 
 
 ////        Auteur auteur = auteurService.findAuteur(newBook.getAuteur());

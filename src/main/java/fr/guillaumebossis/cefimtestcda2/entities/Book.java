@@ -30,30 +30,30 @@ public class Book {
     // Paramètre fetch de @ManyToOne
     // EAGER (default) : Récupération de l'auteur en même temps que le Book
     // LAZY : Récupération différé au moment où on accède à cet attribut
-    @ManyToOne
-    @JoinColumn(name = "auteur_id", updatable = false, insertable = false)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "auteur_id", updatable = true, insertable = true)
     private Auteur auteur;
 
     // Dédiée à l'insertion
-    @Column(name ="auteur_id")
-    private Integer auteurId;
+//    @Column(name ="auteur_id")
+//    private Integer auteurId;
 
     @Column(name = "is_removed")
     private boolean isRemoved;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "state_id", updatable = false, insertable = false)
     private State state;
 
-    @Column(name ="state_id")
-    private Integer stateId;
+//    @Column(name ="state_id")
+//    private Integer stateId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "genre_id", updatable = false, insertable = false)
     private Genre genre;
 
-    @Column(name ="genre_id")
-    private Integer genreId;
+//    @Column(name ="genre_id")
+//    private Integer genreId;
 
     public Book() {}
 
@@ -145,29 +145,29 @@ public class Book {
         this.genre = genre;
     }
 
-    public Integer getAuteurId() {
-        return auteurId;
-    }
+//    public Integer getAuteurId() {
+//        return auteurId;
+//    }
+//
+//    public void setAuteurId(Integer auteurId) {
+//        this.auteurId = auteurId;
+//    }
+//
+//    public Integer getStateId() {
+//        return stateId;
+//    }
+//
+//    public void setStateId(Integer stateId) {
+//        this.stateId = stateId;
+//    }
 
-    public void setAuteurId(Integer auteurId) {
-        this.auteurId = auteurId;
-    }
-
-    public Integer getStateId() {
-        return stateId;
-    }
-
-    public void setStateId(Integer stateId) {
-        this.stateId = stateId;
-    }
-
-    public Integer getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(Integer genreId) {
-        this.genreId = genreId;
-    }
+//    public Integer getGenreId() {
+//        return genreId;
+//    }
+//
+//    public void setGenreId(Integer genreId) {
+//        this.genreId = genreId;
+//    }
 
     // Redéfinition de equals pour tester l'égalité entre 2 instances
     @Override
